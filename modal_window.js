@@ -1,9 +1,9 @@
 
 class Modal_window {
 
-    constructor(blackout, closeBut) {
-        this.blacout = blackout;
-        this.closeBut = closeBut;
+    constructor({blackout, closeBut}) {
+        this.blackout = blackout === false || blackout === true ? blackout : true;
+        this.closeBut = closeBut === false || closeBut === true ? closeBut : true;
         this.closeElem = '<svg version="1.1" id="closeElem" class="js-closeModal" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"\n' +
             '\t width="348.333px" height="348.334px" viewBox="0 0 348.333 348.334"\n' +
             '\t xml:space="preserve">\n' +
@@ -76,16 +76,24 @@ class Modal_window {
 
     initialize(){
 
+        console.log('blackout ' +  this.blackout);
+        console.log('closebut ' + this.closeBut);
+
         if(this.closeBut === true){
             this.addCloseElem();
         }
-        if(this.blacout === false) {
+        if(this.blackout === false) {
             this.changeBlackout();
         }
         this.buttonsIdentification();
+
     }
 
 }
 
-let modal = new Modal_window(true, true );
+let modal = new Modal_window({
+    // blackout: false,
+    // closeBut: false
+});
+
 modal.initialize();
