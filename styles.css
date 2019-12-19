@@ -34,7 +34,7 @@ form{
     background-color: ghostwhite;
     display: none;
     z-index: 5;
-    min-width: 300px;
+    min-width: 280px;
     padding: 1%;
 }
 
@@ -49,7 +49,6 @@ form{
     bottom: 0;
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
-    /*cursor: pointer;  Add a pointer on hover */
 }
 
 #closeElem{
@@ -90,5 +89,17 @@ form{
 
     to {
         opacity: 0;
+    }
+}
+
+@media (max-width: 1000px){
+    .modalWindow{
+        width: 70%;
+    }
+}
+
+@media (max-width: 600px) {
+    .modalWindow{
+        width: 80%;
     }
 }
