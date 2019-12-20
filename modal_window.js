@@ -55,8 +55,12 @@ class Modal_window {
     };
 
     buttonsIdentification = () => {
-    let buttonOpen = document.querySelector('.js-callModal');
-    buttonOpen.addEventListener('click', this.command_for_open);
+
+        let buttonOpenArr = document.querySelectorAll('.js-callModal');
+        for (let i = 0; i < buttonOpenArr.length; i++){
+            let buttonOpen = buttonOpenArr[i];
+            buttonOpen.addEventListener('click', this.command_for_open);
+        }
 
         if (this.closeBut === true){
             let buttonClose = document.querySelector('.js-closeModal');
