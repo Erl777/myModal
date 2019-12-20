@@ -1,9 +1,11 @@
 
 class Modal_window {
 
-    constructor({blackout, closeBut}) {
+    constructor({blackout, closeBut, speed}) {
         this.blackout = blackout === false || blackout === true ? blackout : true;
         this.closeBut = closeBut === false || closeBut === true ? closeBut : true;
+        this.speed = speed || speed !== undefined ? speed : 0.8;
+        this.speed_mc = this.speed * 1000;
         this.closeElem = '<svg version="1.1" id="closeElem" class="js-closeModal" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"\n' +
             '\t width="348.333px" height="348.334px" viewBox="0 0 348.333 348.334"\n' +
             '\t xml:space="preserve">\n' +
@@ -26,7 +28,7 @@ class Modal_window {
         this.overlay.classList.add('open');
 
         this.modal.classList.add('open');
-        setTimeout(this.opening, 800);
+        setTimeout(this.opening, this.speed_mc);
     };
 
     opening = () => {
@@ -41,7 +43,7 @@ class Modal_window {
         overlay.classList.add('close');
 
         this.modal.classList.add('close');
-        setTimeout(this.closing, 800);
+        setTimeout(this.closing, this.speed_mc);
 
     };
 
@@ -74,10 +76,22 @@ class Modal_window {
         this.overlay.style.backgroundColor = 'rgba(0,0,0,0)';
     };
 
+    createClass(name,rules){
+        var style = document.createElement('style');
+        style.type = 'text/css';
+        document.getElementsByTagName('head')[0].appendChild(style);
+        if(!(style.sheet||{}).insertRule)
+            (style.styleSheet || style.sheet).addRule(name, rules);
+        else
+            style.sheet.insertRule(name+"{"+rules+"}",0);
+    }
+
     initialize(){
 
         console.log('blackout ' +  this.blackout);
         console.log('closebut ' + this.closeBut);
+        console.log('speed ' + this.speed);
+        console.log('speed mc ' + this.speed_mc);
 
         if(this.closeBut === true){
             this.addCloseElem();
@@ -85,6 +99,13 @@ class Modal_window {
         if(this.blackout === false) {
             this.changeBlackout();
         }
+
+
+        let speed_str = this.speed + 's';
+
+        this.createClass('.open', `animation: ${speed_str} linear open`);
+        this.createClass('.close', `animation: ${speed_str} linear close`);
+
         this.buttonsIdentification();
 
     }
@@ -92,8 +113,9 @@ class Modal_window {
 }
 
 let modal = new Modal_window({
-    // blackout: false,
-    // closeBut: false
+    // blackout: true,
+    // closeBut: false,
+    // speed: 2
 });
 
 modal.initialize();
