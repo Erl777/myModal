@@ -1,12 +1,17 @@
 
 class Modal_window {
 
-    constructor({blackout, closeBut, speed}) {
-        this.blackout = blackout === false || blackout === true ? blackout : true;
-        this.closeBut = closeBut === false || closeBut === true ? closeBut : true;
-        this.speed = speed || speed !== undefined ? speed : 0.8;
-        this.speed_mc = this.speed * 1000;
-        this.closeElem = '<svg version="1.1" id="closeElem" class="js-closeModal" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"\n' +
+    constructor(settings) {
+
+        const init =  settings || {};
+        this.settings = {
+            blackout : init.blackout || false,
+            closeBut : init.closeBut ||  false,
+            speed : init.speed || 0.8
+        };
+        console.log(this.settings);
+        this.speed_mc = this.settings.speed * 1000;
+        this.closeElem = '<svg version="1.1" id="closeElem" class="js-closeModal" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"\n' +
             '\t width="348.333px" height="348.334px" viewBox="0 0 348.333 348.334"\n' +
             '\t xml:space="preserve">\n' +
             '\t<path d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85\n' +
@@ -62,7 +67,7 @@ class Modal_window {
             buttonOpen.addEventListener('click', this.command_for_open);
         }
 
-        if (this.closeBut === true){
+        if (this.settings.closeBut === true){
             let buttonClose = document.querySelector('.js-closeModal');
             buttonClose.addEventListener('click', this.command_for_close);
         }
@@ -91,21 +96,20 @@ class Modal_window {
     }
 
     initialize(){
-
-        console.log('blackout ' +  this.blackout);
-        console.log('closebut ' + this.closeBut);
-        console.log('speed ' + this.speed);
+        console.log('blackout ' +  this.settings.blackout);
+        console.log('closebut ' + this.settings.closeBut);
+        console.log('speed ' + this.settings.speed);
         console.log('speed mc ' + this.speed_mc);
 
-        if(this.closeBut === true){
+        if(this.settings.closeBut === true){
             this.addCloseElem();
         }
-        if(this.blackout === false) {
+        if(this.settings.blackout === false) {
             this.changeBlackout();
         }
 
 
-        let speed_str = this.speed + 's';
+        let speed_str = this.settings.speed + 's';
 
         this.createClass('.open', `animation: ${speed_str} linear open`);
         this.createClass('.close', `animation: ${speed_str} linear close`);
@@ -118,8 +122,8 @@ class Modal_window {
 
 let modal = new Modal_window({
     // blackout: true,
-    // closeBut: false,
-    // speed: 2
+    // closeBut: true,
+    // speed: 0.5
 });
 
 modal.initialize();
