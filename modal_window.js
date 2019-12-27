@@ -7,7 +7,8 @@ class Modal_window {
         this.settings = {
             blackout : init.blackout || false,
             closeBut : init.closeBut ||  false,
-            speed : init.speed || 0.8
+            speed : init.speed || 0.8,
+            appearanceEffect: settings.appearanceEffect || 'fade'
         };
         console.log(this.settings);
         this.speed_mc = this.settings.speed * 1000;
@@ -111,8 +112,28 @@ class Modal_window {
 
         let speed_str = this.settings.speed + 's';
 
-        this.createClass('.open', `animation: ${speed_str} linear open`);
-        this.createClass('.close', `animation: ${speed_str} linear close`);
+        // this.createClass('.open', `animation: ${speed_str} linear open`);
+        this.createClass('.open', `animation: ${speed_str} linear top-to-middle`);
+
+        switch (this.settings.appearanceEffect) {
+            case 'fade':
+                this.createClass('.open', `animation: ${speed_str} linear open`);
+                this.createClass('.close', `animation: ${speed_str} linear close`);
+                break;
+            case 'top-to-middle':
+                this.createClass('.open', `animation: ${speed_str} linear top-to-middle`);
+                this.createClass('.close', `animation: ${speed_str} linear close`);
+                break;
+            case 'left-to-right':
+                this.createClass('.open', `animation: ${speed_str} linear left-to-right`);
+                this.createClass('.close', `animation: ${speed_str} linear close`);
+                break;
+            default:
+                this.createClass('.open', `animation: ${speed_str} linear open`);
+                this.createClass('.close', `animation: ${speed_str} linear close`);
+        }
+
+        // this.createClass('.close', `animation: ${speed_str} linear close`);
 
         this.buttonsIdentification();
 
@@ -123,7 +144,9 @@ class Modal_window {
 let modal = new Modal_window({
     blackout: true,
     closeBut: true,
-    // speed: 0.5
+    // speed: 0.8,
+    appearanceEffect: 'top-to-middle'
+    // appearanceEffect: 'left-to-right'
 });
 
 modal.initialize();

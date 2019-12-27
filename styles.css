@@ -85,6 +85,30 @@ form{
     }
 }
 
+@keyframes top-to-middle {
+    from {
+        transform: translateY(-150%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes left-to-right {
+    from {
+        transform: translateX(-150%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
 @media (max-width: 1000px){
     .modalWindow{
         width: 70%;
