@@ -20,7 +20,7 @@ class Modal_window {
             '\t\tl105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554\n' +
             '\t\tL279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"/>\n' +
             '</svg>';
-        this.modal = document.querySelector('.js-modalWindow');
+        this.modal = document.getElementById('modalWindow');
         this.overlay = document.getElementById('overlay');
     }
 
@@ -61,7 +61,7 @@ class Modal_window {
 
     buttonsIdentification = () => {
 
-        let buttonOpenArr = document.querySelectorAll('.js-callModal');
+        let buttonOpenArr = document.querySelectorAll('[data-target="modalWindow"]');
         for (let i = 0; i < buttonOpenArr.length; i++){
             let buttonOpen = buttonOpenArr[i];
             buttonOpen.addEventListener('click', this.command_for_open);
@@ -121,8 +121,8 @@ class Modal_window {
 }
 
 let modal = new Modal_window({
-    // blackout: true,
-    // closeBut: true,
+    blackout: true,
+    closeBut: true,
     // speed: 0.5
 });
 
