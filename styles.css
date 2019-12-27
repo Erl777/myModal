@@ -97,7 +97,7 @@ form{
     }
 }
 
-@keyframes left-to-right {
+@keyframes left-to-mid {
     from {
         transform: translateX(-150%);
         opacity: 0;
@@ -105,6 +105,18 @@ form{
 
     to {
         transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes leftTop-to-mid {
+    from {
+        transform: translate(-150%, -150%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate(0%, 0%);
         opacity: 1;
     }
 }

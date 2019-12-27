@@ -23,6 +23,8 @@ class Modal_window {
             '</svg>';
         this.modal = document.getElementById('modalWindow');
         this.overlay = document.getElementById('overlay');
+
+        this.initialize();
     }
 
     command_for_open = () => {
@@ -96,6 +98,32 @@ class Modal_window {
             style.sheet.insertRule(name+"{"+rules+"}",0);
     }
 
+    choosingAppearenceEffect(){
+        let speed_str = (this.settings.speed + 0.001 ) + 's';
+
+        switch (this.settings.appearanceEffect) {
+            case 'fade':
+                this.createClass('.open', `animation: ${speed_str} linear open`);
+                this.createClass('.close', `animation: ${speed_str} linear close`);
+                break;
+            case 'top-to-middle':
+                this.createClass('.open', `animation: ${speed_str} linear top-to-middle`);
+                this.createClass('.close', `animation: ${speed_str} linear close`);
+                break;
+            case 'left-to-mid':
+                this.createClass('.open', `animation: ${speed_str} linear left-to-mid`);
+                this.createClass('.close', `animation: ${speed_str} linear close`);
+                break;
+            case 'leftTop-to-mid':
+                this.createClass('.open', `animation: ${speed_str} linear leftTop-to-mid`);
+                this.createClass('.close', `animation: ${speed_str} linear close`);
+                break;
+            default:
+                this.createClass('.open', `animation: ${speed_str} linear open`);
+                this.createClass('.close', `animation: ${speed_str} linear close`);
+        }
+    }
+
     initialize(){
         console.log('blackout ' +  this.settings.blackout);
         console.log('closebut ' + this.settings.closeBut);
@@ -109,31 +137,7 @@ class Modal_window {
             this.changeBlackout();
         }
 
-
-        let speed_str = this.settings.speed + 's';
-
-        // this.createClass('.open', `animation: ${speed_str} linear open`);
-        this.createClass('.open', `animation: ${speed_str} linear top-to-middle`);
-
-        switch (this.settings.appearanceEffect) {
-            case 'fade':
-                this.createClass('.open', `animation: ${speed_str} linear open`);
-                this.createClass('.close', `animation: ${speed_str} linear close`);
-                break;
-            case 'top-to-middle':
-                this.createClass('.open', `animation: ${speed_str} linear top-to-middle`);
-                this.createClass('.close', `animation: ${speed_str} linear close`);
-                break;
-            case 'left-to-right':
-                this.createClass('.open', `animation: ${speed_str} linear left-to-right`);
-                this.createClass('.close', `animation: ${speed_str} linear close`);
-                break;
-            default:
-                this.createClass('.open', `animation: ${speed_str} linear open`);
-                this.createClass('.close', `animation: ${speed_str} linear close`);
-        }
-
-        // this.createClass('.close', `animation: ${speed_str} linear close`);
+        this.choosingAppearenceEffect();
 
         this.buttonsIdentification();
 
@@ -141,12 +145,12 @@ class Modal_window {
 
 }
 
-let modal = new Modal_window({
+new Modal_window({
     blackout: true,
     closeBut: true,
-    // speed: 0.8,
+    // speed: 1,
+    // appearanceEffect: 'fade'
     appearanceEffect: 'top-to-middle'
-    // appearanceEffect: 'left-to-right'
+    // appearanceEffect: 'left-to-mid'
+    // appearanceEffect: 'leftTop-to-mid'
 });
-
-modal.initialize();
